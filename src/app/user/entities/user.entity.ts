@@ -1,4 +1,5 @@
 import { City } from 'src/app/city/entities/city.entity';
+import { Entry } from 'src/app/item/entities/entry.entity';
 import { UF } from 'src/app/uf/entities/uf.entity';
 import {
   Column,
@@ -7,11 +8,12 @@ import {
   Entity,
   Index,
   ManyToOne,
+  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
 
-@Entity({})
+@Entity()
 export class User {
   @PrimaryGeneratedColumn({ type: 'int' })
   id: number;
@@ -43,6 +45,9 @@ export class User {
 
   @Column({ type: 'int', nullable: true })
   addressNumber: number;
+
+  @OneToMany(() => Entry, (entry) => entry.user)
+  entry: Entry[];
 
   @CreateDateColumn()
   createdAt: Date;

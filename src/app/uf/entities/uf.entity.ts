@@ -1,4 +1,5 @@
 import { City } from 'src/app/city/entities/city.entity';
+import { Supplier } from 'src/app/supplier/entities/supplier.entity';
 import {
   Column,
   Entity,
@@ -25,6 +26,9 @@ export class UF {
 
   @OneToMany((type) => City, (city) => city.uf)
   cities: City[];
+
+  @OneToMany(() => Supplier, (supplier) => supplier.uf)
+  supplier: Supplier[];
 
   @CreateDateColumn()
   createdAt: Date;

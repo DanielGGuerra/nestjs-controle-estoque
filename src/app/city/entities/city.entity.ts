@@ -1,3 +1,4 @@
+import { Supplier } from 'src/app/supplier/entities/supplier.entity';
 import { UF } from 'src/app/uf/entities/uf.entity';
 import {
   Column,
@@ -5,6 +6,7 @@ import {
   DeleteDateColumn,
   Entity,
   ManyToOne,
+  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
@@ -19,6 +21,9 @@ export class City {
 
   @Column({ type: 'varchar', length: 50, nullable: false })
   name: string;
+
+  @OneToMany(() => Supplier, (supplier) => supplier.uf)
+  supplier: Supplier[];
 
   @CreateDateColumn()
   createdAt: Date;

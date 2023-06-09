@@ -1,5 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { UfService } from '../uf.service';
+import { ufMock } from './__mocks__/uf.mock';
 
 describe('UfService', () => {
   let service: UfService;
@@ -14,5 +15,13 @@ describe('UfService', () => {
 
   it('should be defined', () => {
     expect(service).toBeDefined();
+  });
+
+  it('should return an array of cats', async () => {
+    const result = [ufMock];
+
+    jest.spyOn(service, 'findOne').mockRejectedValue(() => result);
+
+    expect(await service.findAll()).toEqual(result);
   });
 });
